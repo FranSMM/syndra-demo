@@ -31,12 +31,12 @@ st.markdown("""
     .main-header {
         font-size: 2.5rem;
         font-weight: 700;
-        color: #1a1a2e;
+        color: #ffffff;
         margin-bottom: 0.2rem;
     }
     .sub-header {
         font-size: 1.1rem;
-        color: #6b7280;
+        color: #94a3b8;
         margin-bottom: 2rem;
     }
     .positive { color: #16a34a; font-weight: 600; }
@@ -83,7 +83,7 @@ with st.sidebar:
         "🔑 API Key",
         type="password",
         placeholder="syndra_xxxxxxxxxxxxxxxx",
-        help="Your Syndra API key. Request demo access at contact@syndradata.com",
+        help="Your Syndra API key. Request demo access at syndradata@gmail.com",
     )
 
     ticker = st.text_input(
@@ -114,7 +114,7 @@ with st.sidebar:
     st.markdown(
         "<div style='text-align:center; font-size:0.8rem; color:#9ca3af;'>"
         "© 2026 Syndra Data Engine<br>"
-        "<a href='mailto:contact@syndradata.com'>contact@syndradata.com</a>"
+        "<a href='mailto:syndradata@gmail.com'>syndradata@gmail.com</a>"
         "</div>",
         unsafe_allow_html=True,
     )
@@ -137,8 +137,8 @@ st.markdown(
 if not api_key:
     st.warning("👈 Please enter your API Key in the sidebar to begin.")
     st.info(
-        "Don't have a key? Request demo access at **contact@syndradata.com** "
-        "or connect with us on [LinkedIn](https://linkedin.com/in/fransmm)."
+        "Don't have a key? Request demo access at **syndradata@gmail.com** "
+        "or connect with us on [LinkedIn](https://www.linkedin.com/in/francisco-montesinos/)."
     )
     st.stop()
 
@@ -410,6 +410,6 @@ col_cta1, col_cta2, col_cta3 = st.columns(3)
 with col_cta1:
     st.link_button("📖 Full API Docs", "https://api.syndradata.com/docs", use_container_width=True)
 with col_cta2:
-    st.link_button("💬 Contact Sales", "mailto:contact@syndradata.com", use_container_width=True)
+    st.link_button("💬 Contact Sales", "mailto:syndradata@gmail.com", use_container_width=True)
 with col_cta3:
     st.link_button("⭐ Star on GitHub", "https://github.com/FranSMM/syndra-docs", use_container_width=True)
