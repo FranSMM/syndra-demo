@@ -92,11 +92,13 @@ with st.sidebar:
         placeholder="e.g. NVDA, AAPL, TSLA",
     ).upper().strip()
 
-    time_window = st.selectbox(
-        "⏱️ Time Window",
-        options=["1 day", "3 days", "7 days", "14 days", "30 days"],
-        index=1,
-        help="Aggregation window for sentiment analysis",
+    article_limit = st.slider(
+        "📰 Article Limit",
+        min_value=10,
+        max_value=100,
+        value=20,
+        step=10,
+        help="Number of recent articles to analyze for sentiment",
     )
 
     st.markdown("---")
@@ -150,13 +152,13 @@ if not ticker:
 # FETCH FUNCTION WITH CACHE
 # ──────────────────────────────────────────────────────────────────────────────
 @st.cache_data(ttl=300, show_spinner=False)
-def fetch_sentiment_data(ticker_symbol: str, api_key: str, window: str):
+def fetch_sentiment_data(ticker_symbol: str, api_key: str, limit: int):
     """
     Fetches sentiment data from the Syndra API.
     Cached for 5 minutes to protect the VPS from traffic spikes.
     """
     headers = {"X-API-Key": api_key}
-    params = {"time_window": window.replace(" ", "")}
+    params = {"limit": limit}
 
     try:
         resp = requests.get(
@@ -189,7 +191,7 @@ fetch_triggered = st.session_state.get("fetch_triggered", True)
 if fetch_triggered:
     with st.spinner(f"🔍 Analyzing sentiment for **{ticker}**..."):
         try:
-            data = fetch_sentiment_data(ticker, api_key, time_window)
+            data = fetch_sentiment_data(ticker, api_key, article_limit)
         except ValueError as e:
             st.error(f"❌ {e}")
             st.stop()
@@ -213,7 +215,7 @@ col1, col2, col3, col4, col5 = st.columns(5)
 sentiment = data.get("aggregated_sentiment", "neutral")
 score = data.get("average_score", 0.0)
 count = data.get("article_count", 0)
-window = data.get("time_window", time_window)
+window = data.get("time_window", "N/A")
 
 sentiment_class = sentiment.lower()
 sentiment_emoji = {"positive": "🟢", "negative": "🔴", "neutral": "⚪"}.get(sentiment_class, "⚪")
@@ -391,7 +393,7 @@ with st.expander("View JSON (for integration debugging)", expanded=False):
         f'data = requests.get(\n'
         f'    "{API_BASE}/sentiment/{ticker}",\n'
         f'    headers={{"X-API-Key": "{api_key[:8]}..."}},\n'
-        f'    params={{"time_window": "{time_window.replace(" ", "")}"}}\n'
+        f'    params={{"limit": {article_limit}}}\n'
         f').json()'
     )
     st.code(code_snippet, language="python")
