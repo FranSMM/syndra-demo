@@ -386,14 +386,15 @@ st.markdown("### 🔧 Raw API Response")
 
 with st.expander("View JSON (for integration debugging)", expanded=False):
     st.json(data)
-    st.code(f"""
-# Python quick-start
-data = requests.get(
-    "{API_BASE}/sentiment/{ticker}",
-    headers={"X-API-Key": "{api_key[:8]}..."},
-    params={"time_window": "{time_window.replace(' ', '')}"}
-).json()
-    """.strip(), language="python")
+    code_snippet = (
+        f'# Python quick-start\n'
+        f'data = requests.get(\n'
+        f'    "{API_BASE}/sentiment/{ticker}",\n'
+        f'    headers={{"X-API-Key": "{api_key[:8]}..."}},\n'
+        f'    params={{"time_window": "{time_window.replace(" ", "")}"}}\n'
+        f').json()'
+    )
+    st.code(code_snippet, language="python")
 
 # ── FOOTER CTA ──
 st.markdown("---")
