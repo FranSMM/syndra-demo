@@ -39,29 +39,45 @@ st.markdown("""
         color: #94a3b8;
         margin-bottom: 2rem;
     }
-    .positive { color: #16a34a; font-weight: 600; }
-    .negative { color: #dc2626; font-weight: 600; }
-    .neutral  { color: #6b7280; font-weight: 600; }
+    .positive { color: #22c55e; font-weight: 600; }
+    .negative { color: #ef4444; font-weight: 600; }
+    .neutral  { color: #9ca3af; font-weight: 600; }
     .signal-card {
-        background: #f8fafc;
-        border-left: 4px solid #e2e8f0;
+        background: #0f172a;
+        border-left: 4px solid #334155;
+        border-top: 1px solid #1e293b;
+        border-right: 1px solid #1e293b;
+        border-bottom: 1px solid #1e293b;
         border-radius: 8px;
-        padding: 16px;
-        margin-bottom: 12px;
+        padding: 18px;
+        margin-bottom: 14px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
-    .signal-card.positive-border { border-left-color: #16a34a; }
-    .signal-card.negative-border { border-left-color: #dc2626; }
-    .signal-card.neutral-border  { border-left-color: #6b7280; }
+    .signal-card.positive-border { border-left-color: #22c55e; }
+    .signal-card.negative-border { border-left-color: #ef4444; }
+    .signal-card.neutral-border  { border-left-color: #9ca3af; }
     .methodology-box {
-        background: #eff6ff;
-        border: 1px solid #bfdbfe;
+        background: #1e293b;
+        border: 1px solid #334155;
         border-radius: 8px;
-        padding: 16px;
-        margin: 1rem 0;
+        padding: 20px;
+        margin: 1.5rem 0;
+        color: #cbd5e1;
+        font-size: 0.95rem;
+        line-height: 1.6;
     }
     .methodology-box h4 {
         margin-top: 0;
-        color: #1e40af;
+        color: #38bdf8;
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+    }
+    .methodology-box strong { color: #f8fafc; }
+    .methodology-box code {
+        background: #0f172a;
+        color: #7dd3fc;
+        padding: 2px 6px;
+        border-radius: 4px;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -362,16 +378,16 @@ if signals:
         <div class="signal-card {border_class}">
             <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                 <div style="flex:1;">
-                    <a href="{url}" target="_blank" style="text-decoration:none; color:#1e293b; font-weight:600; font-size:1.05rem;">
+                    <a href="{url}" target="_blank" style="text-decoration:none; color:#f8fafc; font-weight:600; font-size:1.1rem; line-height:1.4;">
                         {title}
                     </a>
-                    <div style="margin-top:6px; font-size:0.85rem; color:#64748b;">
-                        {source} · {published}
+                    <div style="margin-top:8px; font-size:0.85rem; color:#94a3b8; font-weight:500;">
+                        {source} &nbsp;·&nbsp; {published}
                     </div>
                 </div>
                 <div style="text-align:right; margin-left:16px; min-width:100px;">
-                    <div class="{label_class}" style="font-size:1.1rem;">{label.upper()}</div>
-                    <div style="font-size:0.9rem; color:#475569; font-weight:500;">{score_s:.4f}</div>
+                    <div class="{label_class}" style="font-size:1.15rem; letter-spacing:0.05em;">{label.upper()}</div>
+                    <div style="font-size:0.95rem; color:#cbd5e1; font-weight:500; margin-top:4px;">{score_s:.4f}</div>
                 </div>
             </div>
         </div>
