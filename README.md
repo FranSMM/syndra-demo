@@ -4,6 +4,8 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red?style=flat-square&logo=streamlit)
 ![REST API](https://img.shields.io/badge/REST%20API-FastAPI-009688?style=flat-square&logo=fastapi)
 
+👉 **[Live Demo: syndra-demo.streamlit.app](https://syndra-demo.streamlit.app/)**
+
 ## What is this?
 
 This repository contains the **presentation layer** for Syndra. It is a "thin client" Streamlit application designed strictly to serve as a visual SDK and B2B sales dashboard. 
