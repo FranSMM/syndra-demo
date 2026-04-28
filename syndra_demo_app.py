@@ -134,7 +134,7 @@ with st.sidebar:
     st.markdown("#### 📚 Resources")
     st.link_button("API Documentation", "https://api.syndradata.com/docs", use_container_width=True)
     st.link_button("JSON Schema (Gist)", "https://gist.github.com/FranSMM/7f69e0e54352634f5b977e8c0662b23a", use_container_width=True)
-    st.link_button("GitHub Repository", "https://github.com/FranSMM/syndra-data-engine", use_container_width=True)
+    st.link_button("GitHub Repository", "https://github.com/FranSMM/syndra-docs", use_container_width=True)
 
     st.markdown("---")
     st.markdown(
