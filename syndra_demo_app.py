@@ -112,9 +112,17 @@ with st.sidebar:
         "📰 Article Limit",
         min_value=10,
         max_value=100,
-        value=20,
+        value=50,
         step=10,
-        help="Number of recent articles to analyze for sentiment",
+        help="Maximum number of recent articles to analyze",
+    )
+
+    days_window = st.selectbox(
+        "⏱️ Time Window",
+        options=[1, 3, 7, 14, 30],
+        format_func=lambda x: f"Last {x} days",
+        index=1,
+        help="Optional: Filter articles by strict time window",
     )
 
     st.markdown("---")
@@ -168,13 +176,13 @@ if not ticker:
 # FETCH FUNCTION WITH CACHE
 # ──────────────────────────────────────────────────────────────────────────────
 @st.cache_data(ttl=300, show_spinner=False)
-def fetch_sentiment_data(ticker_symbol: str, api_key: str, limit: int):
+def fetch_sentiment_data(ticker_symbol: str, api_key: str, limit: int, d_window: int):
     """
     Fetches sentiment data from the Syndra API.
     Cached for 5 minutes to protect the VPS from traffic spikes.
     """
     headers = {"X-API-Key": api_key}
-    params = {"limit": limit}
+    params = {"limit": limit, "days_window": d_window}
 
     try:
         resp = requests.get(
@@ -207,7 +215,7 @@ fetch_triggered = st.session_state.get("fetch_triggered", True)
 if fetch_triggered:
     with st.spinner(f"🔍 Analyzing sentiment for **{ticker}**..."):
         try:
-            data = fetch_sentiment_data(ticker, api_key, article_limit)
+            data = fetch_sentiment_data(ticker, api_key, article_limit, days_window)
         except ValueError as e:
             st.error(f"❌ {e}")
             st.stop()
@@ -409,7 +417,7 @@ with st.expander("View JSON (for integration debugging)", expanded=False):
         f'data = requests.get(\n'
         f'    "{API_BASE}/sentiment/{ticker}",\n'
         f'    headers={{"X-API-Key": "{api_key[:8]}..."}},\n'
-        f'    params={{"limit": {article_limit}}}\n'
+        f'    params={{"limit": {article_limit}, "days_window": {days_window}}}\n'
         f').json()'
     )
     st.code(code_snippet, language="python")
