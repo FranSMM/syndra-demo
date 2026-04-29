@@ -157,6 +157,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+
 # ──────────────────────────────────────────────────────────────────────────────
 # API KEY VALIDATION
 # ──────────────────────────────────────────────────────────────────────────────
@@ -166,6 +167,17 @@ if not api_key:
         "Don't have a key? Request demo access at **syndradata@gmail.com** "
         "or connect with us on [LinkedIn](https://www.linkedin.com/in/francisco-montesinos/)."
     )
+    
+    st.markdown("---")
+    st.markdown("### 📊 Dashboard Preview")
+    st.markdown("Here is a preview of the Syndra intelligence dashboard in action:")
+    
+    try:
+        st.image("assets/syndra_demo_dashboard_1.png", use_container_width=True)
+        st.image("assets/syndra_demo_dashboard_2.png", use_container_width=True)
+    except FileNotFoundError:
+        st.caption("*(Preview images will appear here once added to the assets folder)*")
+        
     st.stop()
 
 if not ticker:
