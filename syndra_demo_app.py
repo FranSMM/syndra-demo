@@ -173,8 +173,11 @@ if not api_key:
     st.markdown("Here is a preview of the Syndra intelligence dashboard in action:")
     
     try:
-        st.image("assets/syndra_demo_dashboard_1.png", use_container_width=True)
-        st.image("assets/syndra_demo_dashboard_2.png", use_container_width=True)
+        col_img1, col_img2 = st.columns(2)
+        with col_img1:
+            st.image("assets/syndra_demo_dashboard_1.png", use_container_width=True, caption="Aggregated Sentiment & Trends")
+        with col_img2:
+            st.image("assets/syndra_demo_dashboard_2.png", use_container_width=True, caption="Recent Signals & Distribution")
     except FileNotFoundError:
         st.caption("*(Preview images will appear here once added to the assets folder)*")
         
