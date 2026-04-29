@@ -304,7 +304,7 @@ with st.expander("📖 Understanding the Scoring Methodology", expanded=False):
         Unlike regression models, FinBERT outputs <strong>classification probabilities via Softmax</strong>:
         </p>
         <ul>
-            <li><code>sentiment_score</code> = <code>P(positive) − P(negative)</code>, ranging from <strong>−1.0 to +1.0</strong></li>
+            <li><code>sentiment_score</code> = <code>(P(positive) − P(negative)) * (1 − P(neutral))</code>, ranging from <strong>−1.0 to +1.0</strong></li>
             <li><code>sentiment_label</code> = argmax of [positive, negative, neutral] probabilities</li>
         </ul>
         <p>
